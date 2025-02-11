@@ -74,4 +74,14 @@ public_users.get('/review/:isbn',function (req, res) {
   res.send(books[isbn].reviews);
 });
 
+
+public_users.get('/review/:isbn',function (req, res) {
+    const isbn = req.params.isbn;
+    getByISBN(req.params.isbn)
+    .then(
+        result => res.send(result.reviews),
+        error => res.status(error.status).json({message: error.message})
+    );
+});
+
 module.exports.general = public_users;
